@@ -1,0 +1,97 @@
+* {
+  background-color: #f8f3eb; //border: 1px solid black;
+  font-family: monospace;
+  text-align: -webkit-center;
+  margin:auto;
+}
+
+h1 {
+  font-size: 200%;
+}
+
+.hero {
+  margin: auto;
+  margin-bottom: 5%;
+  width: 100%;
+}
+.locations {
+  margin-top:5%;
+}
+
+#headline {
+  font-family: 'Tangerine', serif;
+  font-size: 500%;
+  text-align: -webkit-center;
+  margin: auto;
+  margin-top: 5%;
+  margin-bottom: 2%;
+  width: 33%;
+}
+
+.hero img {
+  display: block;
+  width: 80%;
+  margin: auto;
+}
+
+#subline {
+  font-family: 'Tangerine', serif;
+  font-size: 300%;
+  text-align: -webkit-center;
+  margin: auto;
+  margin-top: 2%;
+  width: 30%;
+}
+
+#storeResults ul {
+  font-size: 30px;
+  font-family: monospace;
+}
+
+#storeResults ul li {
+  border: 1px solid black;
+  font-size: 16px;
+  font-family: monospace;
+}
+
+#storeResults ul p {
+  font-size: 20px;
+  font-family: monospace;
+}
+
+#pikeMarket {
+  margin-left: 5%;
+  display: inline-block;
+  width: 40%;
+  text-align: -webkit-center;
+}
+
+#seaTac {
+  float: right;
+  margin-right: 5%;
+  display: inline-block;
+  width: 40%;
+  text-align: -webkit-center;
+}
+
+#seaCenter {
+  margin-left: 5%;
+  display: inline-block;
+  width: 40%;
+  text-align: -webkit-center;
+}
+
+#capHill {
+  float: right;
+  margin-right: 5%;
+  display: inline-block;
+  width: 40%;
+  text-align: -webkit-center;
+}
+
+#alki {
+  margin-left: 5%;
+  display: inline-block;
+  width: 40%;
+  text-align: -webkit-center;
+}

@@ -5,7 +5,7 @@ var HofO = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3
 //Pike Market Object
 var pikeMarket = {
   // Stores the min/max hourly customers, and the average cookies per customer, in object properties
-  name: 'Pike Market',
+  name: '1st and Pike',
   storeID: 'pikeMarket',
   minPHCustomers: 23,
   maxPHCustomers: 65,
@@ -33,7 +33,7 @@ var pikeMarket = {
     this.getCookieSales();
     var totalCookies = 0;
     console.log('Cookie!');
-    this.storeResults[0] = '1st and Pike';
+    this.storeResults[0] = this.name;
     for (var i = 0; i < this.cookieArray.length; i++) {
       this.storeResults.push(HofO[i] + ': ' + this.cookieArray[i] + ' cookies.');
       totalCookies = totalCookies + this.cookieArray[i];
@@ -74,7 +74,7 @@ var seaTac = {
     this.getCookieSales();
     var totalCookies = 0;
     console.log('Cookie!');
-    this.storeResults[0] = '1st and Pike';
+    this.storeResults[0] = this.name;
     for (var i = 0; i < this.cookieArray.length; i++) {
       this.storeResults.push(HofO[i] + ': ' + this.cookieArray[i] + ' cookies.');
       totalCookies = totalCookies + this.cookieArray[i];
@@ -84,7 +84,7 @@ var seaTac = {
   }
 };
 
-//SeaTac Object
+//Seattle Center Object
 var seattleCenter = {
   // Stores the min/max hourly customers, and the average cookies per customer, in object properties
   name: 'Seattle Center',
@@ -115,7 +115,7 @@ var seattleCenter = {
     this.getCookieSales();
     var totalCookies = 0;
     console.log('Cookie!');
-    this.storeResults[0] = '1st and Pike';
+    this.storeResults[0] = this.name;
     for (var i = 0; i < this.cookieArray.length; i++) {
       this.storeResults.push(HofO[i] + ': ' + this.cookieArray[i] + ' cookies.');
       totalCookies = totalCookies + this.cookieArray[i];
@@ -125,7 +125,7 @@ var seattleCenter = {
   }
 };
 
-//Capitol HillObject
+//Capitol Hill Object
 var capitolHill = {
   // Stores the min/max hourly customers, and the average cookies per customer, in object properties
   name: 'Capitol Hill',
@@ -156,7 +156,7 @@ var capitolHill = {
     this.getCookieSales();
     var totalCookies = 0;
     console.log('Cookie!');
-    this.storeResults[0] = '1st and Pike';
+    this.storeResults[0] = this.name;
     for (var i = 0; i < this.cookieArray.length; i++) {
       this.storeResults.push(HofO[i] + ': ' + this.cookieArray[i] + ' cookies.');
       totalCookies = totalCookies + this.cookieArray[i];
@@ -197,7 +197,7 @@ var alki = {
     this.getCookieSales();
     var totalCookies = 0;
     console.log('Cookie!');
-    this.storeResults[0] = '1st and Pike';
+    this.storeResults[0] = this.name;
     for (var i = 0; i < this.cookieArray.length; i++) {
       this.storeResults.push(HofO[i] + ': ' + this.cookieArray[i] + ' cookies.');
       totalCookies = totalCookies + this.cookieArray[i];
@@ -209,12 +209,15 @@ var alki = {
 
 // Display the values of each array as unordered lists in the browser
 function renderStores() {
+  var storeDiv = document.createElement('div');
+  storeDiv.id = 'storeResults';
+  document.body.appendChild(storeDiv);
   for (var i = 0; i < allResults.length; i++) {
     var store = document.createElement('ul');
     store.id = allResults[i][0];
     store.textContent = allResults[i][1][0];
-    document.body.appendChild(store);
-    for(var j = 1; j < allResults[i][1].length; j++) {
+    storeDiv.appendChild(store);
+    for (var j = 1; j < allResults[i][1].length; j++) {
       var liVal = document.createElement('li');
       liVal.textContent = allResults[i][1][j];
       store.appendChild(liVal);
@@ -231,33 +234,3 @@ seattleCenter.getResults();
 capitolHill.getResults();
 alki.getResults();
 renderStores();
-// Calculating the sum of these hourly totals; your output for each location should look like this:
-//
-// 1st and Pike
-//
-// 6am: 16 cookies
-// 7am: 20 cookies
-// 8am: 35 cookies
-// 9am: 48 cookies
-// 10am: 56 cookies
-// 11am: 77 cookies
-// 12pm: 93 cookies
-// 1pm: 144 cookies
-// 2pm: 119 cookies
-// 3pm: 84 cookies
-// 4pm: 61 cookies
-// 5pm: 23 cookies
-// 6pm: 42 cookies
-// 7pm: 57 cookies
-// 8pm: 29 cookies
-// Total: 657 cookies
-// Display the lists on sales.html. We will be adding features to this application and working with its layout throughout the week.
-//
-// Here are the starting numbers that you'll need to build these objects:
-//
-// Location	Min / Cust	Max / Cust	Avg Cookie / Sale
-// 1st and Pike	23	65	6.3
-// SeaTac Airport	3	24	1.2
-// Seattle Center	11	38	3.7
-// Capitol Hill	20	38	2.3
-// Alki	2	16	4.6
