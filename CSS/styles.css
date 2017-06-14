@@ -15,13 +15,9 @@ p {
   font-size: 150%;
 }
 
-#bigCookie {
-  width: 10%;
-}
-
-#cookie {
-  display: none;
-  margin: 1%;
+#subline #bigCookie {
+  display: inline-block;
+  background-color: pink;
   width: 3%;
 }
 
@@ -66,12 +62,12 @@ p {
   margin: auto;
   margin-top: 5%;
   margin-bottom: 2%;
-  width: 33%;
+  width: 50%;
 }
 
 .hero img {
   display: block;
-  width: 50%;
+  width: 30%;
   margin: auto;
 }
 
@@ -140,4 +136,31 @@ p {
   display: inline-block;
   width: 40%;
   text-align: -webkit-center;
+}
+
+#salesTable {
+  width: 80%;
+  border: 5px solid pink;
+  background-color: pink;
+  margin: 1%;
+  box-shadow: -1px 1px 1px grey, 1px 1px 1px grey, -1px -1px 1px grey ,1px -1px 1px grey;
+}
+
+th {
+  font-family: monospace;
+  font-size: 130%;
+  margin: 1%;
+  padding: 1%;
+}
+
+td:first-child {
+  font-weight: bold;
+  font-size: 130%
+}
+
+td {
+  font-size: 120%;
+  margin: 1%;
+  font-family: monospace;
+  padding: 1%;
 }
