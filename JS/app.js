@@ -1,50 +1,44 @@
 'use strict';
 var allResults = [];
-var hofO = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
+var hofO = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 var totals = [];
 
-function AddStore(name, storeID, min, max, avgCook) {
+function AddStore(name, min, max, avgCook) {
   // Stores the min/max hourly customers, and the average cookies per customer, in object properties
   this.name = name;
-  this.storeID = storeID;
   this.min = min;
   this.max = max;
   this.avgCook = avgCook;
-  var customerArray = [];
-  var cookieArray = [];
-  var storeResults = [];
+  this.customerArray = [];
+  this.cookieArray = [];
+  this.storeResults = [];
   this.getResults();
+  this.renderStores();
 };
 // Uses a method of that object to generate a random number of customers per hour. Objects/Math/random
 AddStore.prototype.getRandCustomers = function() {
-  var reference = [];
   for (var i = 0; i < hofO.length; i++) {
     var randCust = Math.floor(Math.random() * (this.max - this.min + 1)) + this.min;
-    reference.push(randCust);
+    this.customerArray.push(randCust);
   }
-  this.customerArray = reference;
 };
 // Calculate and store the simulated amounts of cookies purchased for each hour at each location using average cookies purchased and the random number of customers generated
 AddStore.prototype.getCookieSales = function() {
   this.getRandCustomers();
-  var reference = [];
   for (var i = 0; i < hofO.length; i++) {
-    reference.push(Math.floor(this.customerArray[i] * this.avgCook));
+    this.cookieArray.push(Math.floor(this.customerArray[i] * this.avgCook));
   }
-  this.cookieArray = reference;
 };
 // Store the results for each location in a separate array... perhaps as a property of the object representing that location
 AddStore.prototype.getResults = function() {
   this.getCookieSales();
   var totalCookies = 0;
-  var reference = [];
-  reference[0] = this.name;
+  this.storeResults[0] = this.name;
   for (var i = 0; i < hofO.length; i++) {
-    reference.push(this.cookieArray[i]);
+    this.storeResults.push(this.cookieArray[i]);
     totalCookies = totalCookies + this.cookieArray[i];
   }
   totals.push(totalCookies);
-  this.storeResults = reference;
   allResults.push([this.name, this.storeResults, totalCookies]);
 };
 
@@ -75,14 +69,12 @@ function renderHead() {
   document.getElementById('salesTable').appendChild(headRow);
 }
 
-function renderStores() {
+AddStore.prototype.renderStores = function() {
   //open div for table
-  var storeDiv = document.createElement('div');
-  storeDiv.id = 'storeResults';
+  var storeDiv = document.getElementById('storeResults');
   //Open Table
   var table = document.getElementById('salesTable');
   //render heading
-  renderHead();
   //main loop
   //Create a row for each store and adding its data to that row via a loop
   //add your store total at the end of each loop
@@ -102,12 +94,12 @@ function renderStores() {
   storeDiv.appendChild(table);
   //close table div
   document.body.appendChild(storeDiv);
+  allResults = [];
 };
-
-var pike2 = new AddStore('1st and Pike', 'pikeMarket', 23, 65, 6.3);
-var pike = new AddStore('1st and Pike', 'pikeMarket', 23, 65, 6.3);
-var seaTac = new AddStore('Sea Tac Airport', 'seaTac', 3, 24, 1.2);
-var seaCenter = new AddStore('Seattle Center', 'seaCenter', 11, 38, 3.7);
-var capHill = new AddStore('Capitol Hill', 'capHill', 20, 38, 2.3);
-var alki = new AddStore('Alki', 'alki', 2, 16, 4.6);
-renderStores();
+renderHead();
+var pike = new AddStore('1st and Pike', 23, 65, 6.3);
+var seaTac = new AddStore('Sea Tac Airport', 3, 24, 1.2);
+var seaCenter = new AddStore('Seattle Center', 11, 38, 3.7);
+var capHill = new AddStore('Capitol Hill', 20, 38, 2.3);
+var alki = new AddStore('Alki', 2, 16, 4.6);
+//renderStores();
