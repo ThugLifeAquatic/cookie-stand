@@ -84,7 +84,7 @@ function renderStores() {
   //render heading
   renderHead();
   //main loop
-    //Create a row for each store and adding its data to that row via a loop
+  //Create a row for each store and adding its data to that row via a loop
   //add your store total at the end of each loop
   for (var i = 0; i < allResults.length; i++) {
     var trVal = document.createElement('tr');
