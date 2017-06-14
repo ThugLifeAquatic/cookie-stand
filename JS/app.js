@@ -1,236 +1,113 @@
 'use strict';
 var allResults = [];
-var HofO = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
+var hofO = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
+var totals = [];
 
-//Pike Market Object
-var pikeMarket = {
+function AddStore(name, storeID, min, max, avgCook) {
   // Stores the min/max hourly customers, and the average cookies per customer, in object properties
-  name: '1st and Pike',
-  storeID: 'pikeMarket',
-  minPHCustomers: 23,
-  maxPHCustomers: 65,
-  avgCookies: 6.3,
-  customerArray: [],
-  cookieArray: [],
-  storeResults: [],
-  // Uses a method of that object to generate a random number of customers per hour. Objects/Math/random
-  getRandCustomers: function() {
-    for (var i = 0; i < HofO.length; i++) {
-      var randCust = Math.floor(Math.random() * (this.maxPHCustomers - this.minPHCustomers + 1)) + this.minPHCustomers;
-      this.customerArray.push(randCust);
-    }
-  },
-  // Calculate and store the simulated amounts of cookies purchased for each hour at each location using average cookies purchased and the random number of customers generated
-  getCookieSales: function() {
-    for (var i = 0; i < this.customerArray.length; i++) {
-      this.cookieArray.push(Math.floor(this.customerArray[i] * this.avgCookies));
-    }
-    console.log(this.cookieArray);
-  },
-  // Store the results for each location in a separate array... perhaps as a property of the object representing that location
-  getResults: function() {
-    this.getRandCustomers();
-    this.getCookieSales();
-    var totalCookies = 0;
-    console.log('Cookie!');
-    this.storeResults[0] = this.name;
-    for (var i = 0; i < this.cookieArray.length; i++) {
-      this.storeResults.push(HofO[i] + ': ' + this.cookieArray[i] + ' cookies.');
-      totalCookies = totalCookies + this.cookieArray[i];
-    }
-    allResults.push([this.storeID, this.storeResults, 'Total Cookies: ' + totalCookies]);
-    console.log(allResults[0][2]);
+  this.name = name;
+  this.storeID = storeID;
+  this.min = min;
+  this.max = max;
+  this.avgCook = avgCook;
+  var customerArray = [];
+  var cookieArray = [];
+  var storeResults = [];
+  this.getResults();
+};
+// Uses a method of that object to generate a random number of customers per hour. Objects/Math/random
+AddStore.prototype.getRandCustomers = function() {
+  var reference = [];
+  for (var i = 0; i < hofO.length; i++) {
+    var randCust = Math.floor(Math.random() * (this.max - this.min + 1)) + this.min;
+    reference.push(randCust);
   }
+  this.customerArray = reference;
+};
+// Calculate and store the simulated amounts of cookies purchased for each hour at each location using average cookies purchased and the random number of customers generated
+AddStore.prototype.getCookieSales = function() {
+  this.getRandCustomers();
+  var reference = [];
+  for (var i = 0; i < hofO.length; i++) {
+    reference.push(Math.floor(this.customerArray[i] * this.avgCook));
+  }
+  this.cookieArray = reference;
+};
+// Store the results for each location in a separate array... perhaps as a property of the object representing that location
+AddStore.prototype.getResults = function() {
+  this.getCookieSales();
+  var totalCookies = 0;
+  var reference = [];
+  reference[0] = this.name;
+  for (var i = 0; i < hofO.length; i++) {
+    reference.push(this.cookieArray[i]);
+    totalCookies = totalCookies + this.cookieArray[i];
+  }
+  totals.push(totalCookies);
+  this.storeResults = reference;
+  allResults.push([this.name, this.storeResults, totalCookies]);
 };
 
-//SeaTac Object
-var seaTac = {
-  // Stores the min/max hourly customers, and the average cookies per customer, in object properties
-  name: 'SeaTac Airport',
-  storeID: 'seaTac',
-  minPHCustomers: 3,
-  maxPHCustomers: 24,
-  avgCookies: 1.2,
-  customerArray: [],
-  cookieArray: [],
-  storeResults: [],
-  // Uses a method of that object to generate a random number of customers per hour. Objects/Math/random
-  getRandCustomers: function() {
-    for (var i = 0; i < HofO.length; i++) {
-      var randCust = Math.floor(Math.random() * (this.maxPHCustomers - this.minPHCustomers + 1)) + this.minPHCustomers;
-      this.customerArray.push(randCust);
-    }
-  },
-  // Calculate and store the simulated amounts of cookies purchased for each hour at each location using average cookies purchased and the random number of customers generated
-  getCookieSales: function() {
-    for (var i = 0; i < this.customerArray.length; i++) {
-      this.cookieArray.push(Math.floor(this.customerArray[i] * this.avgCookies));
-    }
-    console.log(this.cookieArray);
-  },
-  // Store the results for each location in a separate array... perhaps as a property of the object representing that location
-  getResults: function() {
-    this.getRandCustomers();
-    this.getCookieSales();
-    var totalCookies = 0;
-    console.log('Cookie!');
-    this.storeResults[0] = this.name;
-    for (var i = 0; i < this.cookieArray.length; i++) {
-      this.storeResults.push(HofO[i] + ': ' + this.cookieArray[i] + ' cookies.');
-      totalCookies = totalCookies + this.cookieArray[i];
-    }
-    allResults.push([this.storeID, this.storeResults, 'Total Cookies: ' + totalCookies]);
-    console.log(allResults[0][2]);
+function renderHead() {
+  var headRow = document.createElement('tr');
+  //create empty head cell at front so table lines up
+  var emptyHead = document.createElement('th');
+  emptyHead.textContent = '';
+  //add empty head cell to head row
+  headRow.appendChild(emptyHead);
+  //loop through store hours array for table heading
+  for (var i = 0; i < hofO.length; i++) {
+    //open table cell
+    var hours = document.createElement('th');
+    //add text to each cell using hours array
+    hours.textContent = hofO[i];
+    //add cell to head row
+    headRow.appendChild(hours);
+    //close for loop
   }
-};
+  //create "total" cell for head row
+  //this is after the "hours" loop because you want the "total" header at the far column of your table.
+  var totalHead = document.createElement('th');
+  totalHead.textContent = 'Daily Total';
+  //add "total" to head row
+  headRow.appendChild(totalHead);
+  //add head row to table
+  document.getElementById('salesTable').appendChild(headRow);
+}
 
-//Seattle Center Object
-var seattleCenter = {
-  // Stores the min/max hourly customers, and the average cookies per customer, in object properties
-  name: 'Seattle Center',
-  storeID: 'seaCenter',
-  minPHCustomers: 11,
-  maxPHCustomers: 38,
-  avgCookies: 3.7,
-  customerArray: [],
-  cookieArray: [],
-  storeResults: [],
-  // Uses a method of that object to generate a random number of customers per hour. Objects/Math/random
-  getRandCustomers: function() {
-    for (var i = 0; i < HofO.length; i++) {
-      var randCust = Math.floor(Math.random() * (this.maxPHCustomers - this.minPHCustomers + 1)) + this.minPHCustomers;
-      this.customerArray.push(randCust);
-    }
-  },
-  // Calculate and store the simulated amounts of cookies purchased for each hour at each location using average cookies purchased and the random number of customers generated
-  getCookieSales: function() {
-    for (var i = 0; i < this.customerArray.length; i++) {
-      this.cookieArray.push(Math.floor(this.customerArray[i] * this.avgCookies));
-    }
-    console.log(this.cookieArray);
-  },
-  // Store the results for each location in a separate array... perhaps as a property of the object representing that location
-  getResults: function() {
-    this.getRandCustomers();
-    this.getCookieSales();
-    var totalCookies = 0;
-    console.log('Cookie!');
-    this.storeResults[0] = this.name;
-    for (var i = 0; i < this.cookieArray.length; i++) {
-      this.storeResults.push(HofO[i] + ': ' + this.cookieArray[i] + ' cookies.');
-      totalCookies = totalCookies + this.cookieArray[i];
-    }
-    allResults.push([this.storeID, this.storeResults, 'Total Cookies: ' + totalCookies]);
-    console.log(allResults[0][2]);
-  }
-};
-
-//Capitol Hill Object
-var capitolHill = {
-  // Stores the min/max hourly customers, and the average cookies per customer, in object properties
-  name: 'Capitol Hill',
-  storeID: 'capHill',
-  minPHCustomers: 20,
-  maxPHCustomers: 38,
-  avgCookies: 2.3,
-  customerArray: [],
-  cookieArray: [],
-  storeResults: [],
-  // Uses a method of that object to generate a random number of customers per hour. Objects/Math/random
-  getRandCustomers: function() {
-    for (var i = 0; i < HofO.length; i++) {
-      var randCust = Math.floor(Math.random() * (this.maxPHCustomers - this.minPHCustomers + 1)) + this.minPHCustomers;
-      this.customerArray.push(randCust);
-    }
-  },
-  // Calculate and store the simulated amounts of cookies purchased for each hour at each location using average cookies purchased and the random number of customers generated
-  getCookieSales: function() {
-    for (var i = 0; i < this.customerArray.length; i++) {
-      this.cookieArray.push(Math.floor(this.customerArray[i] * this.avgCookies));
-    }
-    console.log(this.cookieArray);
-  },
-  // Store the results for each location in a separate array... perhaps as a property of the object representing that location
-  getResults: function() {
-    this.getRandCustomers();
-    this.getCookieSales();
-    var totalCookies = 0;
-    console.log('Cookie!');
-    this.storeResults[0] = this.name;
-    for (var i = 0; i < this.cookieArray.length; i++) {
-      this.storeResults.push(HofO[i] + ': ' + this.cookieArray[i] + ' cookies.');
-      totalCookies = totalCookies + this.cookieArray[i];
-    }
-    allResults.push([this.storeID, this.storeResults, 'Total Cookies: ' + totalCookies]);
-    console.log(allResults[0][2]);
-  }
-};
-
-//Alki Object
-var alki = {
-  // Stores the min/max hourly customers, and the average cookies per customer, in object properties
-  name: 'Alki',
-  storeID: 'alki',
-  minPHCustomers: 2,
-  maxPHCustomers: 16,
-  avgCookies: 4.6,
-  customerArray: [],
-  cookieArray: [],
-  storeResults: [],
-  // Uses a method of that object to generate a random number of customers per hour. Objects/Math/random
-  getRandCustomers: function() {
-    for (var i = 0; i < HofO.length; i++) {
-      var randCust = Math.floor(Math.random() * (this.maxPHCustomers - this.minPHCustomers + 1)) + this.minPHCustomers;
-      this.customerArray.push(randCust);
-    }
-  },
-  // Calculate and store the simulated amounts of cookies purchased for each hour at each location using average cookies purchased and the random number of customers generated
-  getCookieSales: function() {
-    for (var i = 0; i < this.customerArray.length; i++) {
-      this.cookieArray.push(Math.floor(this.customerArray[i] * this.avgCookies));
-    }
-    console.log(this.cookieArray);
-  },
-  // Store the results for each location in a separate array... perhaps as a property of the object representing that location
-  getResults: function() {
-    this.getRandCustomers();
-    this.getCookieSales();
-    var totalCookies = 0;
-    console.log('Cookie!');
-    this.storeResults[0] = this.name;
-    for (var i = 0; i < this.cookieArray.length; i++) {
-      this.storeResults.push(HofO[i] + ': ' + this.cookieArray[i] + ' cookies.');
-      totalCookies = totalCookies + this.cookieArray[i];
-    }
-    allResults.push([this.storeID, this.storeResults, 'Total Cookies: ' + totalCookies]);
-    console.log(allResults[0][2]);
-  }
-};
-
-// Display the values of each array as unordered lists in the browser
 function renderStores() {
+  //open div for table
   var storeDiv = document.createElement('div');
   storeDiv.id = 'storeResults';
-  document.body.appendChild(storeDiv);
+  //Open Table
+  var table = document.getElementById('salesTable');
+  //render heading
+  renderHead();
+  //main loop
+    //Create a row for each store and adding its data to that row via a loop
+  //add your store total at the end of each loop
   for (var i = 0; i < allResults.length; i++) {
-    var store = document.createElement('ul');
-    store.id = allResults[i][0];
-    store.textContent = allResults[i][1][0];
-    storeDiv.appendChild(store);
-    for (var j = 1; j < allResults[i][1].length; j++) {
-      var liVal = document.createElement('li');
-      liVal.textContent = allResults[i][1][j];
-      store.appendChild(liVal);
+    var trVal = document.createElement('tr');
+    for (var j = 0; j < allResults[i][1].length; j++) {
+      var elTd = document.createElement('td');
+      elTd.textContent = allResults[i][1][j];
+      trVal.appendChild(elTd);
     }
-    var total = document.createElement('p');
-    total.innerHTML = allResults[i][2];
-    console.log(allResults[i][2]);
-    store.appendChild(total);
+    var elTd = document.createElement('td');
+    elTd.textContent = allResults[i][2];
+    trVal.appendChild(elTd);
+    table.appendChild(trVal);
   }
+  //close table
+  storeDiv.appendChild(table);
+  //close table div
+  document.body.appendChild(storeDiv);
 };
-pikeMarket.getResults();
-seaTac.getResults();
-seattleCenter.getResults();
-capitolHill.getResults();
-alki.getResults();
+
+var pike2 = new AddStore('1st and Pike', 'pikeMarket', 23, 65, 6.3);
+var pike = new AddStore('1st and Pike', 'pikeMarket', 23, 65, 6.3);
+var seaTac = new AddStore('Sea Tac Airport', 'seaTac', 3, 24, 1.2);
+var seaCenter = new AddStore('Seattle Center', 'seaCenter', 11, 38, 3.7);
+var capHill = new AddStore('Capitol Hill', 'capHill', 20, 38, 2.3);
+var alki = new AddStore('Alki', 'alki', 2, 16, 4.6);
 renderStores();
