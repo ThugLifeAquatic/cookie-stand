@@ -15,42 +15,16 @@ p {
   font-size: 150%;
 }
 
-#subline #bigCookie {
-  display: inline-block;
-  background-color: pink;
-  width: 3%;
-}
-
-.locations h2 {
-  margin-bottom: 1%;
-  width: 30%;
-  border-bottom: 5px solid pink;
-  background-color: coral;
-  color: pink;
-  text-shadow: 1px 1px black;
-  font-family: 'Tangerine', serif;
-  font-size: 350%;
-}
-
 .hero {
   margin: auto;
   margin-bottom: 1%;
   width: 100%;
 }
 
-.locations {
-  padding: 3%;
-  box-shadow: 0px 2px 2px grey, 0px -1px grey;
-  border-top: 5px solid pink;
-  border-bottom: 5px solid pink;
-  background-color: coral;
-  margin-top: 3%;
-  margin-bottom: 5%;
-}
-
-.locations p {
-  background-color: coral;
-  font-size: 150%;
+.hero img {
+  display: block;
+  width: 30%;
+  margin: auto;
 }
 
 #headline {
@@ -63,12 +37,6 @@ p {
   margin-top: 5%;
   margin-bottom: 2%;
   width: 50%;
-}
-
-.hero img {
-  display: block;
-  width: 30%;
-  margin: auto;
 }
 
 #subline {
@@ -85,6 +53,38 @@ p {
   width: 100%;
 }
 
+#subline #bigCookie {
+  display: inline-block;
+  background-color: pink;
+  width: 3%;
+}
+
+.locations {
+  padding: 3%;
+  box-shadow: 0px 2px 2px grey, 0px -1px grey;
+  border-top: 5px solid pink;
+  border-bottom: 5px solid pink;
+  background-color: coral;
+  margin-top: 3%;
+  margin-bottom: 5%;
+}
+
+.locations h2 {
+  margin-bottom: 1%;
+  width: 30%;
+  border-bottom: 5px solid pink;
+  background-color: coral;
+  color: pink;
+  text-shadow: 1px 1px black;
+  font-family: 'Tangerine', serif;
+  font-size: 350%;
+}
+
+.locations p {
+  background-color: coral;
+  font-size: 150%;
+}
+
 #storeResults ul {
   font-size: 30px;
   font-family: monospace;
@@ -99,43 +99,6 @@ p {
 #storeResults ul p {
   font-size: 20px;
   font-family: monospace;
-}
-
-#pikeMarket {
-  margin-left: 5%;
-  display: inline-block;
-  width: 40%;
-  text-align: -webkit-center;
-}
-
-#seaTac {
-  float: right;
-  margin-right: 5%;
-  display: inline-block;
-  width: 40%;
-  text-align: -webkit-center;
-}
-
-#seaCenter {
-  margin-left: 5%;
-  display: inline-block;
-  width: 40%;
-  text-align: -webkit-center;
-}
-
-#capHill {
-  float: right;
-  margin-right: 5%;
-  display: inline-block;
-  width: 40%;
-  text-align: -webkit-center;
-}
-
-#alki {
-  margin-left: 5%;
-  display: inline-block;
-  width: 40%;
-  text-align: -webkit-center;
 }
 
 #salesTable {
