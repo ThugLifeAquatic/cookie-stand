@@ -2,6 +2,7 @@
 var allResults = [];
 var hofO = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 var totals = [];
+var form = document.getElementById('form');
 
 function AddStore(name, min, max, avgCook) {
   // Stores the min/max hourly customers, and the average cookies per customer, in object properties
@@ -42,33 +43,7 @@ AddStore.prototype.getResults = function() {
   allResults.push([this.name, this.storeResults, totalCookies]);
 };
 
-function renderHead() {
-  var headRow = document.createElement('tr');
-  //create empty head cell at front so table lines up
-  var emptyHead = document.createElement('th');
-  emptyHead.textContent = '';
-  //add empty head cell to head row
-  headRow.appendChild(emptyHead);
-  //loop through store hours array for table heading
-  for (var i = 0; i < hofO.length; i++) {
-    //open table cell
-    var hours = document.createElement('th');
-    //add text to each cell using hours array
-    hours.textContent = hofO[i];
-    //add cell to head row
-    headRow.appendChild(hours);
-    //close for loop
-  }
-  //create "total" cell for head row
-  //this is after the "hours" loop because you want the "total" header at the far column of your table.
-  var totalHead = document.createElement('th');
-  totalHead.textContent = 'Daily Total';
-  //add "total" to head row
-  headRow.appendChild(totalHead);
-  //add head row to table
-  document.getElementById('salesTable').appendChild(headRow);
-}
-
+//main render
 AddStore.prototype.renderStores = function() {
   //open div for table
   var storeDiv = document.getElementById('storeResults');
@@ -96,10 +71,46 @@ AddStore.prototype.renderStores = function() {
   document.body.appendChild(storeDiv);
   allResults = [];
 };
+
+//head render
+function renderHead() {
+  var headRow = document.createElement('tr');
+  //create empty head cell at front so table lines up
+  var emptyHead = document.createElement('th');
+  emptyHead.textContent = '';
+  //add empty head cell to head row
+  headRow.appendChild(emptyHead);
+  //loop through store hours array for table heading
+  for (var i = 0; i < hofO.length; i++) {
+    //open table cell
+    var hours = document.createElement('th');
+    //add text to each cell using hours array
+    hours.textContent = hofO[i];
+    //add cell to head row
+    headRow.appendChild(hours);
+    //close for loop
+  }
+  //create "total" cell for head row
+  //this is after the "hours" loop because you want the "total" header at the far column of your table.
+  var totalHead = document.createElement('th');
+  totalHead.textContent = 'Daily Total';
+  //add "total" to head row
+  headRow.appendChild(totalHead);
+  //add head row to table
+  document.getElementById('salesTable').appendChild(headRow);
+}
+
+//event handler
+function handleSubmit(event) {
+  event.preventDefault();
+  var newStore = new AddStore(event.target.location.value, parseInt(event.target.min.value), parseInt(event.target.max.value), parseInt(event.target.avg.value));
+}
+//execute
 renderHead();
 var pike = new AddStore('1st and Pike', 23, 65, 6.3);
 var seaTac = new AddStore('Sea Tac Airport', 3, 24, 1.2);
 var seaCenter = new AddStore('Seattle Center', 11, 38, 3.7);
 var capHill = new AddStore('Capitol Hill', 20, 38, 2.3);
 var alki = new AddStore('Alki', 2, 16, 4.6);
-//renderStores();
+
+form.addEventListener('submit', handleSubmit);
