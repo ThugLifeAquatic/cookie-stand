@@ -130,14 +130,14 @@ td {
 }
 
 .news {
-   padding: 3%;
+  padding: 3%;
   box-shadow: 0px 2px 2px grey, 0px -1px grey;
   border-top: 5px solid white;
   border-bottom: 5px solid white;
   background-color: pink;
   margin-top: 3%;
   margin-bottom: 5%;
-  height:40%;
+  height: 40%;
 }
 
 .news h2 {
@@ -154,33 +154,33 @@ td {
 .news .featured {
   box-shadow: 0px 2px 2px grey, 0px -1px grey;
   border: 5px solid white;
-  margin:2%;
+  margin: 2%;
   display: inline-block;
-  width:26%;
-  height:400px;
-  overflow:hidden;
+  width: 26%;
+  height: 400px;
+  overflow: hidden;
 }
 
 .news .featured .pics {
-  height:70%;
-  width:100%;
-  overflow:hidden;
+  height: 70%;
+  width: 100%;
+  overflow: hidden;
 }
 
 .news .featured img {
-  margin-left:auto;
-  margin-right:auto;
-  height:100%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
 }
 
 .news .featured h3 {
   text-shadow: 1px 1px black;
   background-color: pink;
   color: white;
-  font-size:150%;
+  font-size: 150%;
 }
 
 .news .featured p {
   color: black;
-  font-size:150%;
+  font-size: 150%;
 }
