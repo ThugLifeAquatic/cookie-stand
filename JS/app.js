@@ -1,3 +1,4 @@
+//gh-pages
 'use strict';
 var allStores = [];
 //var allResults = [];
